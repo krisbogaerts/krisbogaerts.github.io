@@ -1,4 +1,4 @@
-name: 'Automatic build blog'
+name: 'Automatic build'
 on:
   push:
     branches:
