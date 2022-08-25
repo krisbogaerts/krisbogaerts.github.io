@@ -82,17 +82,27 @@ theme_mode: #dark
 # e.g. 'https://cdn.com'
 img_cdn:
 
-# the avatar on sidebar, support local or CORS resources
 avatar: https://media-exp1.licdn.com/dms/image/C5603AQELKDvai-z10A/profile-displayphoto-shrink_200_200/0/1633932732690?e=1666828800&v=beta&t=Ro_IDU6cQJuIgWaZrtKoXYIR3pDmRw_yYi1BWfzRN8Y
 
-# boolean type, the global switch for ToC in posts.
 toc: true
 
-
-
-disqus:
-  comments: true
-  shortname: krisbogaerts   # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+comments:
+  active: disqus
+  disqus:
+    shortname: krisbogaerts
+  # utterances settings › https://utteranc.es/
+  utterances:
+    repo:         # <gh-username>/<repo>
+    issue_term:   # < url | pathname | title | ...>
+  # Giscus options › https://giscus.app
+  giscus:
+    repo:             # <gh-username>/<repo>
+    repo_id:
+    category:
+    category_id:
+    mapping:          # optional, default to 'pathname'
+    input_position:   # optional, default to 'bottom'
+    lang:             # optional, default to the value of `site.lang`
 
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
 assets:
