@@ -21,9 +21,9 @@ timezone: Europe/Brussels
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: personal blog                          # the main title
+title: Tech Notes                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: IT, (Cyber) Security & Smart Home   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   There is no future, no past. There is only the present.
