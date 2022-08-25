@@ -44,8 +44,8 @@ social:
   email: # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/BogaertsKris      # change to your twitter homepage
-    - https://github.com/KrisBogaerts       # change to your github homepage
+    - https://twitter.com/BogaertsKris
+    - https://github.com/KrisBogaerts
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     - https://www.linkedin.com/in/bogaertskris
