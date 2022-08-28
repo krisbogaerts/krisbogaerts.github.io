@@ -199,9 +199,11 @@ Choose branch gh-pages as your GitHub Pages source.
 This should result is a build in the GitHub Actions on you repository
 
 ![GitHub Actions Result](/assets/img/Screenshot_GitHubActions.png)
-you can view the details or results in case of any problems to see what is going wrong
+>You can view the details or results in case of any problems to see what is going wrong
 
 Visit your website at the address indicated by GitHub.
+
+![GitHub Pages Blog v1](/assets/img/Screenshot_blogv1.png)
 
 
 
