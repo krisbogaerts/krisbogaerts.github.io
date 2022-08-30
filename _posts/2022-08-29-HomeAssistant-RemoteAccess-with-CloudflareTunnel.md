@@ -2,7 +2,7 @@
 title: "Home Assistant remote access with CloudFlare Tunnel"
 author: Kris Bogaerts
 date: 2022-08-29
-category: [Smart Home, Blog, Remote Access]
+category: [Smart Home, Home Assistant, Cloudflare, Remote Access]
 tags: [Home Assistant, Smart Home, Cloudflare Tunnel, writeup,  ]
 ---
 
