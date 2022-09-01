@@ -167,7 +167,7 @@ By using Cloudflare (as a proxy), we can add additional security to the connecti
 ## Home Assistant
 
 ## Secure your Home Assistant login with multi-factor authentication.
-https://www.home-assistant.io/docs/authentication/multi-factor-auth/
+[https://www.home-assistant.io/docs/authentication/multi-factor-auth/](https://www.home-assistant.io/docs/authentication/multi-factor-auth/)
 
 >By default, the totp module named authenticator app will be autoloaded.
 
@@ -279,7 +279,7 @@ Open a new browser tab and connect to your external hostname; for example, https
 
 ### Redirect all HTTP to HTTPS
 
-Open a new browser tab and try to connect to your external hostname with HTTP, for example, http://ha.mydomain.com/local.
+Open a new browser tab and try to connect to your external hostname with HTTP, for example, http://ha.mydomain.com.
 This should be redirected to HTTPS
 
 
