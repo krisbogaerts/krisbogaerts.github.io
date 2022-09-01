@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/kbo
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://krisbogaerts.github.io
+  * I am kbo (https://keybase.io/kbo) on keybase.
+  * I have a public key ASDqp1TZj-pjJ0sxj9yyIXepqkoUb9Rtj24A9heqlBKe2Qo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120eaa754d98fea63274b318fdcb22177a9aa4a146fd46d8f6e00f617aa94129ed90a",
+      "host": "keybase.io",
+      "kid": "0120eaa754d98fea63274b318fdcb22177a9aa4a146fd46d8f6e00f617aa94129ed90a",
+      "uid": "a73ac2fa81a0c3e442b439a251edd919",
+      "username": "kbo"
+    },
+    "merkle_root": {
+      "ctime": 1662014785,
+      "hash": "47dec8cd89964cda85664c0018323037c24a04c196c1c66e3315669206db7f0f5b1a9d9d0ceb27a9a0057e5b7ad62b06a3b89553e8d3dd479fbdc3dd4f57d8bf",
+      "hash_meta": "af711051bf19aa45e0092247e423436a6a0b87456920dc1dd0a19d8946f50a9d",
+      "seqno": 23121649
+    },
+    "service": {
+      "entropy": "1IQLfk34DluX/EKlPKJFTZfr",
+      "hostname": "krisbogaerts.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.0.1"
+  },
+  "ctime": 1662014813,
+  "expire_in": 504576000,
+  "prev": "82edef00f5ec5d55b880b4d680874547074c788c0e67941ac5203519e6fe2985",
+  "seqno": 31,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg6qdU2Y/qYydLMY/csiF3qapKFG/UbY9uAPYXqpQSntkKp3BheWxvYWTESpcCH8Qggu3vAPXsXVW4gLTWgIdFRwdMeIwOZ5QaxSA1Geb+KYXEIALP3AFTg9niFKdbJeUvw5RvBNcHFfOMd6/lPR2GJVivAgHCo3NpZ8RA3p6SZ94QfUeCDeNlzVM+jHigIfGCQvXITE3w2/U45kl/wmqOXJU1p30Q8x/zUwENDgTTRwDEH4ZDcVuVjfWpBKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIDcTc0J4bYP8p+4vVe7BBuEeGeL6JxTQtxmLjDLRoYCDo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/kbo
+
+==================================================================
