@@ -1,6 +1,6 @@
 # The Site Configuration
 theme: jekyll-theme-chirpy
-baseurl: '/'
+baseurl: ''
 
 lang: en
 prefer_datetime_locale:
