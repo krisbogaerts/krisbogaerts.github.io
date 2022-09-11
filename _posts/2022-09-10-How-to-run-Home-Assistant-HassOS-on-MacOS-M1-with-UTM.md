@@ -12,7 +12,7 @@ I always used the Home Assistant add-on development container with Visual Studio
 
 Also, rebuilding HA and restoring backups comes with some frustrations :-). Using a MacBook Pro M1 and VMWare fusion does not seem to with Home Assistant Operating system. 
 
-This note is about installing the Home Assistant Operating system on my MacBook Pro M1 with UTM as Hypervisor. This should give me full virtualization and snapshots, which should make my life easier when testing and creating tech notes.
+This note is about installing the Home Assistant Operating system on my MacBook Pro M1 with UTM as Hypervisor. This should give me full virtualization and cloning (but no snapshots), which should make my life easier when testing and creating tech notes.
 
 ## Home Assistant Operating system
 
@@ -64,5 +64,37 @@ Import the qcow2 HA OS image and save
 
 Start the VM and this should give you the details to connect to the Home Assistant interface
 ![](/assets/img/2022-09-10-21-30-25.png){: w="700" h="400" }
+
+## Update 11/09/22: Expand disk
+Default image comes with a disk size of 5GB which is not sufficient.
+
+### Install Qemu On MacOS
+> Assuming that you already have homebrew installed
+
+qemu-img lies within the qemu package, so we'll need to install that. Open Terminal on your Mac.
+Wait for the installation to finish.
+```
+brew install qemu
+```
+
+### Resizing the disk
+
+1. Open UTM, right click your VM and select "Show in Finder"
+2. Right click the .utm file and "Show Package Contents"
+3. Open the "Images" folder, and now you'll see your imported and created disk images. Your hard drive should be named something like disk.qcow2.
+4. Open Terminal on your Mac
+5. Drag your disk.qcow2 into the terminal window, to paste its path. You can also manually enter the path if you prefer that.
+6. Change your command, it  should look something like this:
+   ```
+   qemu-img resize /Users/user/Library/Containers/com.utmapp.UTM/Data/Documents/Home\ Assistant\ OS\.utm/Images/haos_generic-aarch64-9.0.rc2.qcow2 20G
+   ```
+7. Press Enter to execute the command
+   It should say: ```Image resized.```
+   
+8. Now you should be able to start the VM, and the disk should be resized to your desired amount. Home Assistant OS will automatically use this new space and resizes the partition.
+
+9. Go to Setting -> System -> Storage for validation
+
+![](/assets/img/2022-09-11-17-10-53.png)
 
 Quick tech note with the steps that worked for me. I am still testing and validating how stable this works. Good luck!
