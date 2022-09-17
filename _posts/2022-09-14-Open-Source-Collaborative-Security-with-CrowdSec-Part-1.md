@@ -275,19 +275,45 @@ sudo netstat -ltnp | grep endlessh
 ```
 
 # Configure the CrowdSec Data Source
-Syslog will be the data source for this host. We can enable the acquisition of Syslog in the CrowdSec ```acquis.yaml`` file. By default, this is already enabled.
+Syslog will be the data source for this host. We can enable the acquisition of Sin the CrowdSec ```acquis.yaml`` file.
 
 ```bash
 sudo nano /etc/crowdsec/acquis.yaml
 ```
-![](/assets/img/2022-09-14-21-05-15.png)
+
+```text
+filenames:
+  - /var/log/auth.log
+labels:
+  type: syslog
+---
+filenames:
+  - /var/log/kern.log
+  - /var/log/messages
+labels:
+  type: syslog
+---
+filenames:
+  - /var/log/syslog
+labels:
+  type: endlessh
+---
+```
 
 
 # CrowdSec Metrics
 
 Run ```sudo cscli metrics```to see the metrics. there should be activity on the parsers as "PARSED".
 
-![](/assets/img/2022-09-14-21-40-31.png)
+![](/assets/img/2022-09-17-15-16-04.png)
+
+It can take some time but you should CrowdSec banning IP addresses when something is trying to connect via SSH.
+
+```bash
+cscli decisions list
+```
+![](/assets/img/2022-09-17-15-18-29.png)
+
 
 # CrowdSec Commands
 
