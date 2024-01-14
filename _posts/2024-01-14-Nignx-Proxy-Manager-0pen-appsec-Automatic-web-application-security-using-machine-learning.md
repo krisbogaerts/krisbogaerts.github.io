@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Nginx Proxy Manager, Open-appsec Automatic web application security using machine learning"
+title: "Nginx Proxy Manager, Open-appsec automatic web application security using machine learning"
 date: 2024-01-14
 categories: [Open Source, Cybersecurity, Web Application Firewall]
 tags: [Security, open-appsec, Nginx Proxy Manager, Machine Learning]
@@ -196,6 +196,8 @@ Status: Running
 ```
 
 ## Advanced model
+
+https://docs.openappsec.io/getting-started/using-the-advanced-machine-learning-model
 
 After installing the agent runs the 'Simple model'. An advanced model is available on [https://my.openappsec.io/](https://my.openappsec.io/)
 Make sure to create a user account and not use the Github (federation) user. For me the user menu was not available with a Github account.
