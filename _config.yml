@@ -33,7 +33,7 @@ google_analytics:
     proxy_endpoint:
     cache_path:
 
-theme_mode: [light|dark]
+theme_mode: dark
 
 img_cdn:
 
