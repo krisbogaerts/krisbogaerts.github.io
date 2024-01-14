@@ -3,7 +3,6 @@ theme: jekyll-theme-chirpy
 baseurl: ''
 
 lang: en
-prefer_datetime_locale:
 timezone: Europe/Brussels
 
 title: Tech Notes
@@ -34,11 +33,11 @@ google_analytics:
     proxy_endpoint:
     cache_path:
 
-theme_mode: dark
+theme_mode: [light|dark]
 
 img_cdn:
 
-avatar: https://media-exp1.licdn.com/dms/image/C5603AQELKDvai-z10A/profile-displayphoto-shrink_200_200/0/1633932732690?e=1666828800&v=beta&t=Ro_IDU6cQJuIgWaZrtKoXYIR3pDmRw_yYi1BWfzRN8Y
+avatar: https://www.linkedin.com/in/bogaertskris/?lipi=urn%3Ali%3Apage%3Ad_flagship3_feed%3BSm8LPcxDTBiSZL5KiWskDg%3D%3D
 
 toc: true
 
