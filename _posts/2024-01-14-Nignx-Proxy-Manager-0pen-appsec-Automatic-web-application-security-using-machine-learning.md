@@ -50,7 +50,6 @@ services:
   appsec-npm:
     image: 'ghcr.io/openappsec/nginx-proxy-manager-attachment:latest'
     container_name: npm-attachment
-
     healthcheck:
       test: ["CMD", "/bin/check-health"]
       interval: 10s
@@ -78,7 +77,7 @@ services:
     image: 'ghcr.io/openappsec/agent:latest'
     restart: unless-stopped
     environment:
-      - user_email=kris@bogaerts.org
+      - user_email=$OAPPSEC_USER_EMAIL
       - nginxproxymanager=true
       - autoPolicyLoad=true
  
@@ -89,17 +88,13 @@ services:
       - /opt/npm-open-appsec/appsec-localconfig:/ext/appsec
     command: /cp-nano-agent --standalone
     ipc: "container:npm-attachment"
-
     
 ```
 
 
-### Create the following environment variables
+### Create the following environment variable(s)
 
 ```
-MYSQL_ROOT_PASSWORD=
-MYSQL_USER=
-MYSQL_PASSWORD=
 OAPPSEC_USER_EMAIL=
 ```
 
@@ -194,7 +189,6 @@ services:
   appsec-npm:
     image: 'ghcr.io/openappsec/nginx-proxy-manager-attachment:latest'
     container_name: npm-attachment
-
     healthcheck:
       test: ["CMD", "/bin/check-health"]
       interval: 10s
@@ -222,7 +216,7 @@ services:
     image: 'ghcr.io/openappsec/agent:latest'
     restart: unless-stopped
     environment:
-      - user_email=kris@bogaerts.org
+      - user_email=$OAPPSEC_USER_EMAIL
       - nginxproxymanager=true
       - autoPolicyLoad=true
     volumes:
