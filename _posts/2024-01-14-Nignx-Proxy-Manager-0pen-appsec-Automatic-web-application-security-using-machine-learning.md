@@ -38,18 +38,19 @@ In my case NGINX Proxy Manger(NPM)) was already active. I merged the existing do
 Minor Adjustments against the docker compose file from the docs:
 - Running processes as a user/group (in the Open-appsec official docs NPM runs as root)
 - Disabling IPv6
-- Using the database from my existing NPM setup
-- IPC sharing only from the app-sec agent container to the NPM container and not full host shared memory access
+- Using the (SQlite) database from my existing NPM setup
+- IPC sharing only from the npm-attachment container to the openappsec-agent and not full host shared memory access
 - I am using Portainer for management, changed to full paths for the docker volumes
-- Used docker networks vs network_mode because of failures on deployment when using network_mode
 
 ### Docker compose
 
 ```yaml
+version: '3'
 services:
-  app:
+  appsec-npm:
     image: 'ghcr.io/openappsec/nginx-proxy-manager-attachment:latest'
-    container_name: proxy-manager
+    container_name: npm-attachment
+
     healthcheck:
       test: ["CMD", "/bin/check-health"]
       interval: 10s
@@ -59,62 +60,37 @@ services:
       PUID: 1000
       PGID: 1000
       DISABLE_IPV6: 'true'
+    volumes:
+      - /opt/npm-open-appsec/config.json:/app/config/production.json
+      - /opt/npm-open-appsec/data:/data
+      - /opt/npm-open-appsec/letsencrypt:/etc/letsencrypt
+      - /opt/npm-open-appsec/appsec-logs:/ext/appsec-logs
+      - /opt/npm-open-appsec/appsec-localconfig:/ext/appsec
     ports:
       - '80:80' 
       - '81:81'
       - '443:443'
-    volumes:
-      - /opt/npm-oappsec/config.json:/app/config/production.json
-      - /opt/npm-oppsec/data:/data
-      - /opt/npm-oappsec/letsencrypt:/etc/letsencrypt
-      - /opt/npm-oappsec/appsec-logs:/ext/appsec-logs
-      - /opt/npm-opappsec/appsec-localconfig:/ext/appsec
-    depends_on:
-      - proxydb
-    ipc: "container:appsec-agent"
-    networks:
-      - npm
-
+    ipc: "shareable"
+    
   appsec-agent:
-    container_name: appsec-agent
+    container_name: openappsec-agent
+    network_mode: service:appsec-npm
     image: 'ghcr.io/openappsec/agent:latest'
     restart: unless-stopped
     environment:
-      - user_email=$OAPPSEC_USER_EMAIL
+      - user_email=kris@bogaerts.org
       - nginxproxymanager=true
       - autoPolicyLoad=true
+ 
     volumes:
-      - /opt/npm-oappsec/appsec-config:/etc/cp/conf
-      - /opt/npm-oappsec/appsec-data:/etc/cp/data
-      - /opt/npm-oappsec/appsec-logs:/var/log/nano_agent
-      - /opt/npm-oappsec/appsec-localconfig:/ext/appsec
+      - /opt/npm-open-appsec/appsec-config:/etc/cp/conf
+      - /opt/npm-open-appsec/appsec-data:/etc/cp/data
+      - /opt/npm-open-appsec/appsec-logs:/var/log/nano_agent
+      - /opt/npm-open-appsec/appsec-localconfig:/ext/appsec
     command: /cp-nano-agent --standalone
-    ipc: "shareable"
-    networks:
-      - npm
-      
-  proxydb:
-    image: 'yobasystems/alpine-mariadb:latest'
-    container_name: proxy-manager-db
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: 'npm'
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
-    volumes:
-      - /opt/npm-open-appsec/data/mysql:/var/lib/mysql
-    networks:
-      - npm
+    ipc: "container:npm-attachment"
 
-volumes:
-  mysql:
-  data:
-  letsencrypt:
-
-networks:
-  npm:
-    external: true
+    
 ```
 
 
@@ -213,10 +189,12 @@ Add an extra line for the mapping of the line for the ppsec-agent container to m
 Full Example:
 
 ```yaml
+version: '3'
 services:
-  app:
+  appsec-npm:
     image: 'ghcr.io/openappsec/nginx-proxy-manager-attachment:latest'
-    container_name: proxy-manager
+    container_name: npm-attachment
+
     healthcheck:
       test: ["CMD", "/bin/check-health"]
       interval: 10s
@@ -226,63 +204,35 @@ services:
       PUID: 1000
       PGID: 1000
       DISABLE_IPV6: 'true'
+    volumes:
+      - /opt/npm-open-appsec/config.json:/app/config/production.json
+      - /opt/npm-open-appsec/data:/data
+      - /opt/npm-open-appsec/letsencrypt:/etc/letsencrypt
+      - /opt/npm-open-appsec/appsec-logs:/ext/appsec-logs
+      - /opt/npm-open-appsec/appsec-localconfig:/ext/appsec
     ports:
       - '80:80' 
       - '81:81'
       - '443:443'
-    volumes:
-      - /opt/npm-oappsec/config.json:/app/config/production.json
-      - /opt/npm-oppsec/data:/data
-      - /opt/npm-oappsec/letsencrypt:/etc/letsencrypt
-      - /opt/npm-oappsec/appsec-logs:/ext/appsec-logs
-      - /opt/npm-opappsec/appsec-localconfig:/ext/appsec
-    depends_on:
-      - proxydb
-    ipc: "container:appsec-agent"
-    networks:
-      - npm
-
+    ipc: "shareable"
+    
   appsec-agent:
-    container_name: appsec-agent
+    container_name: openappsec-agent
+    network_mode: service:appsec-npm
     image: 'ghcr.io/openappsec/agent:latest'
     restart: unless-stopped
     environment:
-      - user_email=$OAPPSEC_USER_EMAIL
+      - user_email=kris@bogaerts.org
       - nginxproxymanager=true
       - autoPolicyLoad=true
     volumes:
-      - /opt/npm-oappsec/appsec-config:/etc/cp/conf
-      - /opt/npm-oappsec/appsec-data:/etc/cp/data
-      - /opt/npm-oappsec/appsec-logs:/var/log/nano_agent
-      - /opt/npm-oappsec/appsec-localconfig:/ext/appsec
-      - /opt/npm-oappsec/advanced-model:/advanced-model
+      - /opt/npm-open-appsec/appsec-config:/etc/cp/conf
+      - /opt/npm-open-appsec/appsec-data:/etc/cp/data
+      - /opt/npm-open-appsec/appsec-logs:/var/log/nano_agent
+      - /opt/npm-open-appsec/appsec-localconfig:/ext/appsec
+      - /opt/npm-open-appsec/advanced-model:/advanced-model
     command: /cp-nano-agent --standalone
-    ipc: "shareable"
-    networks:
-      - npm
-      
-  proxydb:
-    image: 'yobasystems/alpine-mariadb:latest'
-    container_name: proxy-manager-db
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: 'npm'
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
-    volumes:
-      - /opt/npm-open-appsec/data/mysql:/var/lib/mysql
-    networks:
-      - npm
-
-volumes:
-  mysql:
-  data:
-  letsencrypt:
-
-networks:
-  npm:
-    external: true
+    ipc: "container:npm-attachment"
 ```
 
 
@@ -323,10 +273,8 @@ For troubleshooting and support: https://openappsec.io/support
 
 ## Problems
 
-1. Deploy failures when using "network_mode: service" 
-   Changed to docker networks
 
-2. Open-appsec on Docker HTTP Transaction handler has status "ready" and not "Running"
+1. Open-appsec on Docker HTTP Transaction handler has status "ready" and not "Running"
    Make sure to define the 'ipc: host' or make it shareble as in the example above
    https://docs.openappsec.io/troubleshooting/troubleshooting-guides/open-appsec-on-docker-http-tranasction-handler-is-set-to-ready
 
